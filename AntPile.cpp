@@ -1,14 +1,10 @@
-//
 //  AntPile.cpp
 //  4122_final_project
-//
-//  Created by Javi Rodriguez on 4/22/18.
-//  Copyright © 2018 Georgia Tech. All rights reserved.
-//
 
-#include "AntPile.hpp"
+
 #include <string>
 #include <iostream>
+#include "AntPile.hpp"
 using namespace std;
 
 AntPile::AntPile(int type, int pop, double xcoord, double ycoord) {

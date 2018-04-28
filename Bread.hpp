@@ -1,10 +1,6 @@
-//
 //  Bread.hpp
 //  4122_final_project
-//
-//  Created by Javi Rodriguez on 4/22/18.
-//  Copyright © 2018 Georgia Tech. All rights reserved.
-//
+
 
 #ifndef Bread_hpp
 #define Bread_hpp

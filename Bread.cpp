@@ -1,13 +1,9 @@
-//
 //  Bread.cpp
 //  4122_final_project
-//
-//  Created by Javi Rodriguez on 4/22/18.
-//  Copyright © 2018 Georgia Tech. All rights reserved.
-//
 
-#include "Bread.hpp"
+
 #include <iostream>
+#include "Bread.hpp"
 using namespace std;
 
 Bread::Bread(double size, double xcoord, double ycoord) {
