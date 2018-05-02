@@ -10,14 +10,12 @@ set(GLFW_LIBRARY /usr/local/Cellar/glfw/3.2.1/lib/libglfw.dylib)
 set(SOIL_LIBRARY /usr/local/lib/libSOIL.dylib)
 set(LOCAL_INCLUDE /usr/local/include)
 set(SOIL_INCLUDE /usr/local/include/SOIL)
-set(GLM_INCLUDE /usr/local/Cellar/glm/0.9.8.5/include)
 
 include_directories(
         ${GLEW_INCLUDE_DIR}
         ${OPENGL_INCLUDE_DIR}
         ${LOCAL_INCLUDE}
         ${SOIL_INCLUDE}
-        ${GLM_INCLUDE}
 )
 
 set(SOURCE_FILES graphics.cpp main.cpp)
