@@ -31,8 +31,8 @@ void main()
     }
     else if (shape_type == 1) {
         outColor = vec4(Color, 0.0);
-        float x = (gl_FragCoord.x / width - 0.5) * 2.0;
-        float y = (gl_FragCoord.y / height - 0.5) * 2.0;
+        float x = (gl_FragCoord.x / (width*2.0) - 0.5) * 2.0;
+        float y = (gl_FragCoord.y / (height*2.0) - 0.5) * 2.0;
         if ((x - center.x) * (x - center.x) + (y - center.y) * (y - center.y) < radius * radius
             && (x - center.x) * (x - center.x) + (y - center.y) * (y - center.y)
             > (radius - 0.01) * (radius - 0.01)) {
@@ -41,8 +41,8 @@ void main()
     }
     else if (shape_type == 2) {
         outColor = vec4(Color, 0.0);
-        float x = (gl_FragCoord.x / width - 0.5) * 2.0;
-        float y = (gl_FragCoord.y / height - 0.5) * 2.0;
+        float x = (gl_FragCoord.x / (width*2.0) - 0.5) * 2.0;
+        float y = (gl_FragCoord.y / (height*2.0) - 0.5) * 2.0;
 
         float dxc = x - start.x;
         float dyc = y - start.y;

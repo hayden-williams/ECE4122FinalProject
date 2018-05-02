@@ -25,7 +25,7 @@ private:
 public:
 
     Visual(int width, int height);
-    Visual() : Visual(800, 800) {};
+    Visual() : Visual(600, 600) {};
 
     void displayGraphicsInnerLoop(int num_anthills, float anthills[],
                                   int num_breadcrumbs, float breadcrumbs[], float circles[], float lines[]);
