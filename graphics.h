@@ -12,6 +12,7 @@ private:
 
     const int SHAPE_TYPE_TEX = 0;
     const int SHAPE_TYPE_CIRCLE = 1;
+    const int SHAPE_TYPE_LINE = 2;
 
     GLFWwindow* window;
     GLuint vao;
@@ -26,10 +27,8 @@ public:
     Visual(int width, int height);
     Visual() : Visual(800, 800) {};
 
-    int displayGraphics(int num_anthills, float anthills[],
-                        int num_breadcrumbs, float breadcrumbs[], float circles[]);
     void displayGraphicsInnerLoop(int num_anthills, float anthills[],
-                                  int num_breadcrumbs, float breadcrumbs[], float circles[]);
+                                  int num_breadcrumbs, float breadcrumbs[], float circles[], float lines[]);
     int teardown();
 
     GLFWwindow* getWindow() {
