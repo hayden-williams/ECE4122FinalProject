@@ -62,6 +62,9 @@ int cont; //used input to pause cmd line output
 std::string userInput;
 int count = 0;
 
+uint32_t decrimentCounter = 1; // counter for while loops, start at 1!
+uint32_t max_num_loops_initiation = 30; //max num of while loops before reducing max_dist
+
 
 
 int main() {
@@ -123,11 +126,15 @@ int main() {
 		anthill_x_pos[1] = rand() % x_axis_max;
 		anthill_y_pos[1] = rand() % y_axis_max;
 		dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
+		decrimentCounter = 1;
 		while ( dist0_1 <= min_dist_anthills) {
 			anthill_x_pos[1] = rand() % x_axis_max;
 			anthill_y_pos[1] = rand() % y_axis_max;
 			dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
-			// TODO: reduce min_dist requirements if this while loop runs too long
+			
+			// safety if while loop runs too long
+			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
+			decrimentCounter += 1;
 		}
 		std::cout << "There are 2 Anthills at:" << std::endl;
 		std::cout << anthill_x_pos[0] << ", " << anthill_y_pos[0] << std::endl;
@@ -142,18 +149,28 @@ int main() {
 		anthill_x_pos[2] = rand() % x_axis_max;
 		anthill_y_pos[2] = rand() % y_axis_max;
 		dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
+		decrimentCounter = 1;
 		while (dist0_1 <= min_dist_anthills) {
 			anthill_x_pos[1] = rand() % x_axis_max;
 			anthill_y_pos[1] = rand() % y_axis_max;
 			dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
+
+			// safety if while loop runs too long
+			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
+			decrimentCounter += 1;
 		}
 		dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
 		dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
+		decrimentCounter = 1;
 		while (dist0_2 <= min_dist_anthills || dist1_2 <= min_dist_anthills) {
 			anthill_x_pos[2] = rand() % x_axis_max;
 			anthill_y_pos[2] = rand() % y_axis_max;
 			dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
 			dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
+
+			// safety if while loop runs too long
+			if (decrimentCounter % max_num_loops_initiation == 0) {min_dist_anthills -= 1; }
+			decrimentCounter += 1;
 		}
 		std::cout << "There are 3 Anthills at:" << std::endl;
 		std::cout << anthill_x_pos[0] << ", " << anthill_y_pos[0] << std::endl;
@@ -172,30 +189,45 @@ int main() {
 		anthill_y_pos[3] = rand() % y_axis_max;
 		// make sure first two points are far enough away
 		dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
+		decrimentCounter = 1;
 		while (dist0_1 <= min_dist_anthills) {
 			anthill_x_pos[1] = rand() % x_axis_max;
 			anthill_y_pos[1] = rand() % y_axis_max;
 			dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
+
+			// safety if while loop runs too long
+			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
+			decrimentCounter += 1;
 		}
 		// make sure 3rd point is far enough away
 		dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
 		dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
+		decrimentCounter = 1;
 		while (dist0_2 <= min_dist_anthills || dist1_2 <= min_dist_anthills) {
 			anthill_x_pos[2] = rand() % x_axis_max;
 			anthill_y_pos[2] = rand() % y_axis_max;
 			dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
 			dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
+
+			// safety if while loop runs too long
+			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
+			decrimentCounter += 1;
 		}
 		// make sure 4th point is far enough away
 		dist0_3 = std::sqrt(std::pow(anthill_x_pos[3] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[3] - anthill_y_pos[0], 2));
 		dist1_3 = std::sqrt(std::pow(anthill_x_pos[3] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[3] - anthill_y_pos[1], 2));
 		dist2_3 = std::sqrt(std::pow(anthill_x_pos[3] - anthill_x_pos[2], 2) + std::pow(anthill_y_pos[3] - anthill_y_pos[2], 2));
+		decrimentCounter = 1;
 		while (dist0_3 <= min_dist_anthills || dist1_3 <= min_dist_anthills || dist2_3 <= min_dist_anthills) {
 			anthill_x_pos[3] = rand() % x_axis_max;
 			anthill_y_pos[3] = rand() % y_axis_max;
 			dist0_3 = std::sqrt(std::pow(anthill_x_pos[3] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[3] - anthill_y_pos[0], 2));
 			dist1_3 = std::sqrt(std::pow(anthill_x_pos[3] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[3] - anthill_y_pos[1], 2));
 			dist2_3 = std::sqrt(std::pow(anthill_x_pos[3] - anthill_x_pos[2], 2) + std::pow(anthill_y_pos[3] - anthill_y_pos[2], 2));
+
+			// safety if while loop runs too long
+			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
+			decrimentCounter += 1;
 		}
 		std::cout << "There are 4 Anthills at:" << std::endl;
 		std::cout << anthill_x_pos[0] << ", " << anthill_y_pos[0] << std::endl;
@@ -211,10 +243,15 @@ int main() {
 		anthill_y_pos[1] = rand() % y_axis_max;
 		numAnthill = 2;
 		dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
+		decrimentCounter = 1;
 		while (dist0_1 <= min_dist_anthills) {
 			anthill_x_pos[1] = rand() % x_axis_max;
 			anthill_y_pos[1] = rand() % y_axis_max;
 			dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
+
+			// safety if while loop runs too long
+			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
+			decrimentCounter += 1;
 		}
 		std::cout << "ERROR CASE HIT IN ANTHILL SELECTOR" << std::endl;
 		std::cout << "There are 2 Anthills at:" << std::endl;
@@ -231,11 +268,16 @@ int main() {
 			// only compare to the 2 anthills
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 3) {
@@ -243,12 +285,17 @@ int main() {
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 4) {
@@ -257,6 +304,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
@@ -264,6 +312,10 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else {
@@ -272,6 +324,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
@@ -279,6 +332,10 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		
@@ -296,21 +353,31 @@ int main() {
 			// only compare to the 2 anthills
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
 				dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 				dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 3) {
@@ -318,6 +385,7 @@ int main() {
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || 
 				dist0c_2a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
@@ -325,11 +393,16 @@ int main() {
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || dist1c_2a <= min_dist_crumbs || dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
@@ -337,6 +410,10 @@ int main() {
 				dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 4) {
@@ -345,6 +422,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || 
 				dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
@@ -353,12 +431,17 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || 
 				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs || 
 				dist0c_1c <= min_dist_crumbs) {
@@ -369,6 +452,10 @@ int main() {
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else {
@@ -377,6 +464,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
@@ -384,12 +472,17 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
 				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
 				dist0c_1c <= min_dist_crumbs) {
@@ -400,6 +493,10 @@ int main() {
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		std::cout << "There are 2 Crumbs at:" << std::endl;
@@ -419,26 +516,37 @@ int main() {
 			// only compare to the 2 anthills
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
 				dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 				dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs || 
 				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
 				crumb_x_pos[2] = rand() % x_axis_max;
@@ -447,6 +555,10 @@ int main() {
 				dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 3) {
@@ -454,6 +566,7 @@ int main() {
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
 				dist0c_2a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
@@ -461,11 +574,16 @@ int main() {
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || dist1c_2a <= min_dist_crumbs || dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
@@ -473,12 +591,17 @@ int main() {
 				dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
 			dist2c_2a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[2], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs || 
 				dist2c_2a <= min_dist_crumbs || dist0c_2c <= min_dist_crumbs || 
 				dist1c_2c <= min_dist_crumbs) {
@@ -489,6 +612,10 @@ int main() {
 				dist2c_2a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[2], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 4) {
@@ -497,6 +624,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
 				dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
@@ -505,12 +633,17 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
 				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
 				dist0c_1c <= min_dist_crumbs) {
@@ -521,6 +654,10 @@ int main() {
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
@@ -528,6 +665,7 @@ int main() {
 			dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
 				dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs || 
 				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
@@ -539,6 +677,10 @@ int main() {
 				dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else {
@@ -547,6 +689,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
@@ -554,12 +697,17 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
 				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
 				dist0c_1c <= min_dist_crumbs) {
@@ -570,6 +718,10 @@ int main() {
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
@@ -577,6 +729,7 @@ int main() {
 			dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
 				dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs ||
 				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
@@ -588,6 +741,10 @@ int main() {
 				dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		std::cout << "There are 3 Crumbs at:" << std::endl;
@@ -610,26 +767,37 @@ int main() {
 			// only compare to the 2 anthills
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
 				dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 				dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
 				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
 				crumb_x_pos[2] = rand() % x_axis_max;
@@ -638,12 +806,17 @@ int main() {
 				dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist3c_0a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[0], 2));
 			dist3c_1a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[1], 2));
 			dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 			dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 			dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist3c_0a <= min_dist_crumbs || dist3c_1a <= min_dist_crumbs || 
 				dist0c_3c <= min_dist_crumbs || dist1c_3c <= min_dist_crumbs || 
 				dist2c_3c <= min_dist_crumbs ) {
@@ -654,6 +827,10 @@ int main() {
 				dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 				dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 				dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 3) {
@@ -661,6 +838,7 @@ int main() {
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
 				dist0c_2a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
@@ -668,11 +846,16 @@ int main() {
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || dist1c_2a <= min_dist_crumbs || dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
@@ -680,12 +863,17 @@ int main() {
 				dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
 			dist2c_2a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[2], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
 				dist2c_2a <= min_dist_crumbs || dist0c_2c <= min_dist_crumbs ||
 				dist1c_2c <= min_dist_crumbs) {
@@ -696,6 +884,10 @@ int main() {
 				dist2c_2a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[2], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist3c_0a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[0], 2));
 			dist3c_1a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[1], 2));
@@ -703,6 +895,7 @@ int main() {
 			dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 			dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 			dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist3c_0a <= min_dist_crumbs || dist3c_1a <= min_dist_crumbs || 
 				dist3c_2a <= min_dist_crumbs || dist0c_3c <= min_dist_crumbs || 
 				dist1c_3c <= min_dist_crumbs || dist2c_3c <= min_dist_crumbs) {
@@ -714,6 +907,10 @@ int main() {
 				dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 				dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 				dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 4) {
@@ -722,6 +919,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
 				dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
@@ -730,12 +928,17 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
 				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
 				dist0c_1c <= min_dist_crumbs) {
@@ -746,6 +949,10 @@ int main() {
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
@@ -753,6 +960,7 @@ int main() {
 			dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
 				dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs ||
 				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
@@ -764,6 +972,10 @@ int main() {
 				dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist3c_0a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[0], 2));
 			dist3c_1a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[1], 2));
@@ -772,6 +984,7 @@ int main() {
 			dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 			dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 			dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist3c_0a <= min_dist_crumbs || dist3c_1a <= min_dist_crumbs ||
 				dist3c_2a <= min_dist_crumbs || dist3c_3a <= min_dist_crumbs || 
 				dist0c_3c <= min_dist_crumbs || dist1c_3c <= min_dist_crumbs || 
@@ -785,6 +998,10 @@ int main() {
 				dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 				dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 				dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else {
@@ -793,6 +1010,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
@@ -800,12 +1018,17 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
 			dist1c_1a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[1], 2));
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
 				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
 				dist0c_1c <= min_dist_crumbs) {
@@ -816,6 +1039,10 @@ int main() {
 				dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 				dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 				dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
@@ -823,6 +1050,7 @@ int main() {
 			dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
 				dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs ||
 				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
@@ -834,6 +1062,10 @@ int main() {
 				dist2c_3a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[3], 2));
 				dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 				dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 			dist3c_0a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[0], 2));
 			dist3c_1a = std::sqrt(std::pow(crumb_x_pos[3] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[3] - anthill_y_pos[1], 2));
@@ -842,6 +1074,7 @@ int main() {
 			dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 			dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 			dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist3c_0a <= min_dist_crumbs || dist3c_1a <= min_dist_crumbs ||
 				dist3c_2a <= min_dist_crumbs || dist3c_3a <= min_dist_crumbs ||
 				dist0c_3c <= min_dist_crumbs || dist1c_3c <= min_dist_crumbs ||
@@ -855,6 +1088,10 @@ int main() {
 				dist0c_3c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[3], 2));
 				dist1c_3c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[3], 2));
 				dist2c_3c = std::sqrt(std::pow(crumb_x_pos[2] - crumb_x_pos[3], 2) + std::pow(crumb_y_pos[2] - crumb_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		std::cout << "There are 4 Crumbs at:" << std::endl;
@@ -873,11 +1110,16 @@ int main() {
 			// only compare to the 2 anthills
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 3) {
@@ -885,12 +1127,17 @@ int main() {
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else if (numAnthill == 4) {
@@ -899,6 +1146,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
@@ -906,6 +1154,10 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		else {
@@ -914,6 +1166,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+			decrimentCounter = 1;
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
@@ -921,12 +1174,40 @@ int main() {
 				dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 				dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
+
+				// safety if while loop runs too long
+				if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_crumbs -= 1; }
+				decrimentCounter += 1;
 			}
 		}
 		
 		std::cout << "ERROR CASE HIT IN CRUMB SELECTOR" << std::endl;
 		std::cout << "There is 1 Crumb at:" << std::endl;
 		std::cout << crumb_x_pos[0] << ", " << crumb_y_pos[0] << std::endl;
+	}
+
+	// create anthill and crumb objects
+	if (numAnthill == 2) {
+		// Create object here
+	}
+	else if (numAnthill == 3) {
+		// Create object here
+	}
+	else {
+		// Create object here
+	}
+
+	if (numCrumb == 1) {
+		// Create object here
+	}
+	else if (numCrumb == 2) {
+		// Create object here
+	}
+	else if (numCrumb == 3) {
+		// Create object here
+	}
+	else {
+		// Create object here
 	}
 
 	// create array of objects for anthills and crumbs
