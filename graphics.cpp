@@ -33,6 +33,9 @@ Visual::Visual(int width, int height) {
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    glUniform1i(glGetUniformLocation(shaderProgram, "width"), width);
+    glUniform1i(glGetUniformLocation(shaderProgram, "height"), height);
+
 }
 
 void Visual::createSquare(GLfloat* vertices, float side_length, float x, float y, int tex) {
