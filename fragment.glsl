@@ -9,9 +9,13 @@ uniform sampler2D tex;
 
 // 0: tex
 // 1: circle
+// 2: line
 uniform int shape_type;
-uniform vec2 center;
-uniform float radius;
+uniform vec2 center; // for circle
+uniform float radius; // for circle
+uniform vec2 start; // for line
+uniform vec2 end; // for line
+uniform float percent; // for line
 
 void main()
 {
@@ -30,5 +34,59 @@ void main()
             > (radius - 0.01) * (radius - 0.01)) {
             outColor = vec4(0.0, 0.0, 1.0, 1.0);
         }
+    }
+    else if (shape_type == 2) {
+        outColor = vec4(Color, 0.0);
+        float x = (gl_FragCoord.x / 800.0 - 0.5) * 2.0;
+        float y = (gl_FragCoord.y / 800.0 - 0.5) * 2.0;
+
+        float dxc = x - start.x;
+        float dyc = y - start.y;
+
+        float dxl = end.x - start.x;
+        float dyl = end.y - start.y;
+
+        float cross = dxc * dyl - dyc * dxl;
+
+        float orig_distance = sqrt((end.x - start.x) * (end.x - start.x) + (end.y - start.y) * (end.y - start.y));
+        float vx = end.x - start.x;
+        float vy = end.y - start.y;
+        float mag = sqrt(vx * vx + vy * vy);
+        float ux = vx / mag;
+        float uy = vy / mag;
+        float dist = percent * orig_distance;
+        float endx = start.x + dist * ux;
+        float endy = start.y + dist * uy;
+
+        if (abs(cross) > 0.01 * orig_distance) {
+            return;
+        }
+
+        if (abs(dxl) >= abs(dyl)) {
+            if (dxl > 0) {
+                if (start.x <= x && x <= endx) {
+                    outColor = vec4(0.0, 0.0, 0.0, 1.0);
+                    return;
+                }
+            } else {
+                if (endx <= x && x <= start.x) {
+                    outColor = vec4(0.0, 0.0, 0.0, 1.0);
+                    return;
+                }
+            }
+        } else {
+            if (dyl > 0) {
+                if (start.y <= y && y <= endy) {
+                    outColor = vec4(0.0, 0.0, 0.0, 1.0);
+                    return;
+                }
+            } else {
+                if (endy <= y && y <= start.y) {
+                    outColor = vec4(0.0, 0.0, 0.0, 1.0);
+                    return;
+                }
+            }
+        }
+
     }
 }

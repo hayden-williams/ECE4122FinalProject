@@ -6,10 +6,6 @@
 #include "stdint.h"
 #include <cmath>
 #include <string>
-#include <zconf.h>
-#include <thread>
-#include <iostream>
-#include "graphics.h"
 
 // Num of Anthills: 2-4
 // Num of Crumbs: 1-4
@@ -118,7 +114,7 @@ int main() {
 		if (numCrumb == 1) numCrumb += 1;
 		std::cout << "Num of Crumb is " << numCrumb << std::endl;
 	}
-
+	
 	// Randomly pick anthill
 	if (numAnthill == 2) {
 		// 2 Anthills
@@ -224,7 +220,7 @@ int main() {
 		std::cout << anthill_x_pos[0] << ", " << anthill_y_pos[0] << std::endl;
 		std::cout << anthill_x_pos[1] << ", " << anthill_y_pos[1] << std::endl;
 	}
-
+	
 	// Randomly pick Crumbs
 	if (numCrumb == 1) {
 		// 1 Crumb
@@ -284,7 +280,7 @@ int main() {
 				dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
 			}
 		}
-
+		
 		std::cout << "There is 1 Crumb at:" << std::endl;
 		std::cout << crumb_x_pos[0] << ", " << crumb_y_pos[0] << std::endl;
 	}
@@ -321,8 +317,8 @@ int main() {
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
-			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
-				   dist0c_2a <= min_dist_crumbs) {
+			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || 
+				dist0c_2a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
@@ -348,8 +344,8 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
-			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
-				   dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
+			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs || 
+				dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
@@ -362,9 +358,9 @@ int main() {
 			dist1c_2a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[2], 2));
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
-			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
-				   dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
-				   dist0c_1c <= min_dist_crumbs) {
+			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs || 
+				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs || 
+				dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
 				dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
@@ -394,8 +390,8 @@ int main() {
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
-				   dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
-				   dist0c_1c <= min_dist_crumbs) {
+				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
+				dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
 				dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
@@ -442,8 +438,8 @@ int main() {
 			dist2c_1a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[1], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
-			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
-				   dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
+			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs || 
+				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
 				crumb_x_pos[2] = rand() % x_axis_max;
 				crumb_y_pos[2] = rand() % y_axis_max;
 				dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
@@ -458,7 +454,7 @@ int main() {
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
-				   dist0c_2a <= min_dist_crumbs) {
+				dist0c_2a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
@@ -482,9 +478,9 @@ int main() {
 			dist2c_2a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[2], 2));
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
-			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
-				   dist2c_2a <= min_dist_crumbs || dist0c_2c <= min_dist_crumbs ||
-				   dist1c_2c <= min_dist_crumbs) {
+			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs || 
+				dist2c_2a <= min_dist_crumbs || dist0c_2c <= min_dist_crumbs || 
+				dist1c_2c <= min_dist_crumbs) {
 				crumb_x_pos[2] = rand() % x_axis_max;
 				crumb_y_pos[2] = rand() % y_axis_max;
 				dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
@@ -501,7 +497,7 @@ int main() {
 			dist0c_2a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[2], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[2], 2));
 			dist0c_3a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[3], 2));
 			while (dist0c_0a <= min_dist_crumbs || dist0c_1a <= min_dist_crumbs ||
-				   dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
+				dist0c_2a <= min_dist_crumbs || dist0c_3a <= min_dist_crumbs) {
 				crumb_x_pos[0] = rand() % x_axis_max;
 				crumb_y_pos[0] = rand() % y_axis_max;
 				dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
@@ -515,8 +511,8 @@ int main() {
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
-				   dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
-				   dist0c_1c <= min_dist_crumbs) {
+				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
+				dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
 				dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
@@ -532,8 +528,8 @@ int main() {
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
-				   dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs ||
-				   dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
+				dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs || 
+				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
 				crumb_x_pos[2] = rand() % x_axis_max;
 				crumb_y_pos[2] = rand() % y_axis_max;
 				dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
@@ -564,8 +560,8 @@ int main() {
 			dist1c_3a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[3], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[3], 2));
 			dist0c_1c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[1], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[1], 2));
 			while (dist1c_0a <= min_dist_crumbs || dist1c_1a <= min_dist_crumbs ||
-				   dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
-				   dist0c_1c <= min_dist_crumbs) {
+				dist1c_2a <= min_dist_crumbs || dist1c_3a <= min_dist_crumbs ||
+				dist0c_1c <= min_dist_crumbs) {
 				crumb_x_pos[1] = rand() % x_axis_max;
 				crumb_y_pos[1] = rand() % y_axis_max;
 				dist1c_0a = std::sqrt(std::pow(crumb_x_pos[1] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[1] - anthill_y_pos[0], 2));
@@ -581,8 +577,8 @@ int main() {
 			dist0c_2c = std::sqrt(std::pow(crumb_x_pos[0] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[0] - crumb_y_pos[2], 2));
 			dist1c_2c = std::sqrt(std::pow(crumb_x_pos[1] - crumb_x_pos[2], 2) + std::pow(crumb_y_pos[1] - crumb_y_pos[2], 2));
 			while (dist2c_0a <= min_dist_crumbs || dist2c_1a <= min_dist_crumbs ||
-				   dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs ||
-				   dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
+				dist2c_2a <= min_dist_crumbs || dist2c_3a <= min_dist_crumbs ||
+				dist0c_2c <= min_dist_crumbs || dist1c_2c <= min_dist_crumbs) {
 				crumb_x_pos[2] = rand() % x_axis_max;
 				crumb_y_pos[2] = rand() % y_axis_max;
 				dist2c_0a = std::sqrt(std::pow(crumb_x_pos[2] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[2] - anthill_y_pos[0], 2));
@@ -600,8 +596,8 @@ int main() {
 	}
 	else if (numCrumb == 4) {
 		// 4 Crumbs
-
-
+		
+		
 		std::cout << "There are 4 Crumbs at:" << std::endl;
 		std::cout << crumb_x_pos[0] << ", " << crumb_y_pos[0] << std::endl;
 		std::cout << crumb_x_pos[1] << ", " << crumb_y_pos[1] << std::endl;
@@ -610,7 +606,7 @@ int main() {
 	}
 	else {
 		// ERROR. ASSUME 1 Crumb
-
+		
 		std::cout << "ERROR CASE HIT IN CRUMB SELECTOR" << std::endl;
 		std::cout << "There is 1 Crumb at:" << std::endl;
 		std::cout << crumb_x_pos[0] << ", " << crumb_y_pos[0] << std::endl;
@@ -618,51 +614,16 @@ int main() {
 
 	// create array of objects for anthills and crumbs
 
-	Visual v = Visual();
-
-	while (runSim && !glfwWindowShouldClose(v.getWindow())) {
-
-		// exit with ESC
-		if (glfwGetKey(v.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-			glfwSetWindowShouldClose(v.getWindow(), GL_TRUE);
-			runSim = false;
-			break;
-		}
-
+	while (runSim && timeTick < 10) {
 		// time ticks at ms/tick
 		// This while loop is where the simulation should happen
 		std::cout << "Entered Main While loop" << std::endl;
 		// If crumbs are empty and if Anthills are all searching
 		// end while loop
+		runSim = false; // this needs to be in the check
 		timeTick += 1;
-
-		// OpenGL visualization
-		// array of anthills: x pos, y pos, size
-		float* anthills = new float[numAnthill * 3];
-		for (int i = 0; i < numAnthill; i++) {
-			anthills[3 * i] = anthill_x_pos[i] / 1000.0f - 1.0f;
-			anthills[3 * i + 1] = anthill_y_pos[i] / 1000.0f - 1.0f;
-			anthills[3 * i + 2] = 0.25f;
-		}
-		// array of breadcrumbs: x pos, y pos, size
-		float* crumbs = new float[numCrumb * 3];
-		for (int i = 0; i < numCrumb; i++) {
-			crumbs[3 * i] = crumb_x_pos[i] / 1000.0f - 1.0f;
-			crumbs[3 * i + 1] = crumb_y_pos[i] / 1000.0f - 1.0f;
-			crumbs[3 * i + 2] = 0.25f;
-		}
-		// array of radii of "scout ant" circles for each anthill
-		float circles[] = {0.0f, 0.0f, 0.0f, 0.0f};
-		// array of ant lines for each anthill: target breadcrumb, % of the way there
-		float lines[] = { 0, 0.5f,
-						  1, 0.25f,
-						  1, 1.0f,
-						  0, 0.0f };
-		v.displayGraphicsInnerLoop(numAnthill, anthills, numCrumb, crumbs, circles, lines);
-
 	}
-
-	v.teardown();
+	std::cin >> cont; // USED TO PAUSE CMP PROMT TO SEE DATA
 
 	return 0;
 

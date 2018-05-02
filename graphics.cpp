@@ -3,9 +3,6 @@
 #include <GLFW/glfw3.h>
 #include <fstream>
 #include <SOIL/SOIL.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <thread>
 #include "graphics.h"
 
@@ -15,7 +12,7 @@ const int NO_TEX = 2;
 
 Visual::Visual(int width, int height) {
 
-    window = initialize(width, height, "OpenGL Practice");
+    window = initialize(width, height, "Ant Colony Simulator - ECE 4122 Final Project");
 
     // Create Vertex Array Object
     glGenVertexArrays(1, &vao);
@@ -77,9 +74,11 @@ void Visual::createSquare(GLfloat* vertices, float side_length, float x, float y
 
 
 // place inside while(!glfwWindowShouldClose(window)) loop
-void Visual::displayGraphicsInnerLoop(int num_anthills, float anthills[], int num_breadcrumbs, float breadcrumbs[], float circles[]) {
+void Visual::displayGraphicsInnerLoop(int num_anthills, float anthills[], int num_breadcrumbs, float breadcrumbs[], float circles[], float lines[]) {
+
+    GLfloat my_vert[totalSize * 6 * (num_anthills + num_breadcrumbs + num_anthills + num_anthills)];
+
     // create vertices to represent anthills
-    GLfloat my_vert[totalSize * 6 * (num_anthills + num_breadcrumbs + num_anthills)];
     for (int i = 0; i < num_anthills; i++) {
         createSquare(my_vert + i * totalSize * 6, anthills[3*i + 2],
                      anthills[3*i], anthills[3*i + 1], ANTHILL_TEX);
@@ -94,86 +93,46 @@ void Visual::displayGraphicsInnerLoop(int num_anthills, float anthills[], int nu
         createSquare(my_vert + (i + num_anthills + num_breadcrumbs) * totalSize * 6,
                      circles[i], anthills[3*i], anthills[3*i + 1], NO_TEX);
     }
+    // create squares to cover entire board for lines
+    for (int i = 0; i < num_anthills; i++) {
+        createSquare(my_vert + (i + num_anthills + num_breadcrumbs + num_anthills) * totalSize * 6,
+                     2.0f, 0.0f, 0.0f, NO_TEX);
+    }
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(my_vert),
                  my_vert, GL_STATIC_DRAW); // copy data to buffer
-
-    // exit with ESC
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
 
     // Clear the screen to white
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // draw
+    // draw anthills and breadcrumbs
     glUniform1i(glGetUniformLocation(shaderProgram, "shape_type"), SHAPE_TYPE_TEX);
     glDrawArrays(GL_TRIANGLES, 0, 6 * (num_anthills + num_breadcrumbs));
+    // draw circles
     glUniform1i(glGetUniformLocation(shaderProgram, "shape_type"), SHAPE_TYPE_CIRCLE);
     for (int i = 0; i < num_anthills; i++) {
         glUniform2f(glGetUniformLocation(shaderProgram, "center"), anthills[3*i], anthills[3*i+1]);
         glUniform1f(glGetUniformLocation(shaderProgram, "radius"), circles[i]/2);
         glDrawArrays(GL_TRIANGLES, 6 * (num_anthills + num_breadcrumbs + i), 6);
     }
+    // draw lines
+    glUniform1i(glGetUniformLocation(shaderProgram, "shape_type"), SHAPE_TYPE_LINE);
+    for (int i = 0; i < num_anthills; i++) {
+        float startx = anthills[3*i];
+        float starty = anthills[3*i+1];
+        glUniform2f(glGetUniformLocation(shaderProgram, "start"), startx, starty);
+        float endx = breadcrumbs[3*(int(lines[2*i]))];
+        float endy = breadcrumbs[3*(int(lines[2*i])) + 1];
+        glUniform2f(glGetUniformLocation(shaderProgram, "end"), endx, endy);
+        glUniform1f(glGetUniformLocation(shaderProgram, "percent"), lines[2*i + 1]);
+        glDrawArrays(GL_TRIANGLES, 6 * (num_anthills + num_breadcrumbs + num_anthills + i), 6);
+    }
 
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
 
-
-int Visual::displayGraphics(int num_anthills, float anthills[], int num_breadcrumbs, float breadcrumbs[], float circles[]) {
-
-    // main loop
-    while(!glfwWindowShouldClose(window))
-    {
-        // create vertices to represent anthills
-        GLfloat my_vert[totalSize * 6 * (num_anthills + num_breadcrumbs + num_anthills)];
-        for (int i = 0; i < num_anthills; i++) {
-            createSquare(my_vert + i * totalSize * 6, anthills[3*i + 2],
-                         anthills[3*i], anthills[3*i + 1], ANTHILL_TEX);
-        }
-        // create vertices for breadcrumbs
-        for (int i = 0; i < num_breadcrumbs; i++) {
-            createSquare(my_vert + (i + num_anthills) * totalSize * 6, breadcrumbs[3*i + 2],
-                         breadcrumbs[3*i], breadcrumbs[3*i + 1], BREADCRUMB_TEX);
-        }
-        // create squares for the expanding circles
-        for (int i = 0; i < num_anthills; i++) {
-            createSquare(my_vert + (i + num_anthills + num_breadcrumbs) * totalSize * 6,
-                         circles[i], anthills[3*i], anthills[3*i + 1], NO_TEX);
-        }
-
-        glBufferData(GL_ARRAY_BUFFER, sizeof(my_vert),
-                     my_vert, GL_STATIC_DRAW); // copy data to buffer
-
-        // exit with ESC
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, GL_TRUE);
-
-        // Clear the screen to white
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // draw
-        glUniform1i(glGetUniformLocation(shaderProgram, "shape_type"), SHAPE_TYPE_TEX);
-        glDrawArrays(GL_TRIANGLES, 0, 6 * (num_anthills + num_breadcrumbs));
-        glUniform1i(glGetUniformLocation(shaderProgram, "shape_type"), SHAPE_TYPE_CIRCLE);
-        for (int i = 0; i < num_anthills; i++) {
-            glUniform2f(glGetUniformLocation(shaderProgram, "center"), anthills[3*i], anthills[3*i+1]);
-            glUniform1f(glGetUniformLocation(shaderProgram, "radius"), circles[i]/2);
-            glDrawArrays(GL_TRIANGLES, 6 * (num_anthills + num_breadcrumbs + i), 6);
-        }
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    // teardown
-    glDeleteProgram(shaderProgram);
-    glfwDestroyWindow(window);
-    glfwTerminate();
-    return 0;
-}
 
 int Visual::teardown() {
     glDeleteProgram(shaderProgram);
