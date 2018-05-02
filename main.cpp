@@ -251,7 +251,7 @@ int main() {
 
 	Visual v = Visual();
 
-	while (/*runSim && timeTick < 10 && */ runSim && !glfwWindowShouldClose(v.getWindow())) {
+	while (runSim && !glfwWindowShouldClose(v.getWindow())) {
 
 		// exit with ESC
 		if (glfwGetKey(v.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -265,7 +265,6 @@ int main() {
 		std::cout << "Entered Main While loop" << std::endl;
 		// If crumbs are empty and if Anthills are all searching
 		// end while loop
-		//runSim = false; // this needs to be in the check
 		timeTick += 1;
 
 		// OpenGL visualization
@@ -282,9 +281,9 @@ int main() {
 			crumbs[3 * i + 2] = 0.5f;
 		}
 		float circles[] = {0.0f, 0.0f, 0.0f, 0.0f};
-		v.displayGraphicsInnerLoop(numAnthill, anthills, numCrumb, crumbs, circles); //num_anthills, anthills, num_breadcrumbs, breadcrumbs, circles);
+		v.displayGraphicsInnerLoop(numAnthill, anthills, numCrumb, crumbs, circles);
+		
 	}
-	//std::cin >> cont;
 
 	v.teardown();
 
