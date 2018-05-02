@@ -99,8 +99,8 @@ void Visual::displayGraphicsInnerLoop(int num_anthills, float anthills[], int nu
                  my_vert, GL_STATIC_DRAW); // copy data to buffer
 
     // exit with ESC
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
+    /*if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GL_TRUE);*/
 
     // Clear the screen to white
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);

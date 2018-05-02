@@ -20,7 +20,7 @@ include_directories(
         ${GLM_INCLUDE}
 )
 
-set(SOURCE_FILES graphics.cpp main.cpp graphics.h)
+set(SOURCE_FILES graphics.cpp main.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
