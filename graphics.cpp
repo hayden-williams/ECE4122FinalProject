@@ -113,7 +113,7 @@ void Visual::displayGraphicsInnerLoop(int num_anthills, float anthills[], int nu
     glUniform1i(glGetUniformLocation(shaderProgram, "shape_type"), SHAPE_TYPE_CIRCLE);
     for (int i = 0; i < num_anthills; i++) {
         glUniform2f(glGetUniformLocation(shaderProgram, "center"), anthills[3*i], anthills[3*i+1]);
-        glUniform1f(glGetUniformLocation(shaderProgram, "radius"), circles[i]/2);
+        glUniform1f(glGetUniformLocation(shaderProgram, "radius"), circles[i]/1000.0f);
         glDrawArrays(GL_TRIANGLES, 6 * (num_anthills + num_breadcrumbs + i), 6);
     }
     // draw lines
@@ -125,7 +125,7 @@ void Visual::displayGraphicsInnerLoop(int num_anthills, float anthills[], int nu
         float endx = breadcrumbs[3*(int(lines[2*i]))];
         float endy = breadcrumbs[3*(int(lines[2*i])) + 1];
         glUniform2f(glGetUniformLocation(shaderProgram, "end"), endx, endy);
-        glUniform1f(glGetUniformLocation(shaderProgram, "distance"), lines[2*i + 1]);
+        glUniform1f(glGetUniformLocation(shaderProgram, "distance"), lines[2*i + 1]/1000.0f);
         glDrawArrays(GL_TRIANGLES, 6 * (num_anthills + num_breadcrumbs + num_anthills + i), 6);
     }
 

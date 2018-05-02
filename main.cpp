@@ -1285,7 +1285,7 @@ int main() {
 
 		// time ticks at ms/tick
 		// This while loop is where the simulation should happen
-		std::cout << "Entered Main While loop" << std::endl;
+		//std::cout << "Entered Main While loop" << std::endl;
 		// If crumbs are empty and if Anthills are all searching
 		// end while loop
 		timeTick += 1;
