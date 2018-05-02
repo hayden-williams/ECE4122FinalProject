@@ -6,13 +6,21 @@
 #include "Bread.hpp"
 using namespace std;
 
-Bread::Bread(double size, double xcoord, double ycoord) {
+Bread::Bread(){
+    mass = 0; // initialize to randomly generated size size
+    x = 0; // initialize to randomly generated coordinate
+    y = 0;
+}
+
+Bread::Bread(double size, double xcoord, double ycoord, int num) {
     
     mass = size; // initialize to randomly generated size size
     x = xcoord; // initialize to randomly generated coordinate
     y = ycoord;
+    numbread = num;
     
 }
+
 
 
 void Bread::setMass(double size) {
@@ -30,6 +38,11 @@ double Bread::getXcoord() {
 double Bread::getYcoord() {
     return y;
 }
+
+int Bread::getNumbread() {
+    return numbread;
+}
+
 
 void Bread::printInfo() {
     cout << "Bread Location: (" << x << "," << y << ")" << endl;

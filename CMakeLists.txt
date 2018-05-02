@@ -18,7 +18,7 @@ include_directories(
         ${SOIL_INCLUDE}
 )
 
-set(SOURCE_FILES graphics.cpp main.cpp)
+set(SOURCE_FILES graphics.cpp main.cpp AntPile.cpp Bread.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 

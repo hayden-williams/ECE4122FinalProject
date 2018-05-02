@@ -125,7 +125,7 @@ void Visual::displayGraphicsInnerLoop(int num_anthills, float anthills[], int nu
         float endx = breadcrumbs[3*(int(lines[2*i]))];
         float endy = breadcrumbs[3*(int(lines[2*i])) + 1];
         glUniform2f(glGetUniformLocation(shaderProgram, "end"), endx, endy);
-        glUniform1f(glGetUniformLocation(shaderProgram, "percent"), lines[2*i + 1]);
+        glUniform1f(glGetUniformLocation(shaderProgram, "distance"), lines[2*i + 1]);
         glDrawArrays(GL_TRIANGLES, 6 * (num_anthills + num_breadcrumbs + num_anthills + i), 6);
     }
 

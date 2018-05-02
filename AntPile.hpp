@@ -14,9 +14,10 @@ using namespace std;
 class AntPile {
     
     public:
-    
+
+        AntPile();
         // Initializer (user specifies type, population and pile location)
-        AntPile(int type, int pop, double xcoord, double ycoord);
+        AntPile(int type, double xcoord, double ycoord);
     
         // Setters (there's only one data member that will be changed)
         void setRadius(double radius);
@@ -29,10 +30,12 @@ class AntPile {
         bool getEating();
         double getRadius();
         double getFoodRadius();
+        double getLength();
         double getCarryCap();
         int getOutRate();
         Bread getBreadcrumb();
-        void radiusRun();
+        void radiusRun(Bread**, int);
+        void eat(Bread);
     
         // Misc. Functions
          void printInfo(); // use for debugging and object creation
@@ -50,6 +53,7 @@ class AntPile {
         Bread breadcrumb;
         int outRate;
         int currentOut;
+        double length;
 
 };
 

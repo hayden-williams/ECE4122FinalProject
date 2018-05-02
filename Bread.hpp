@@ -10,15 +10,17 @@
 class Bread {
     
     public:
-    
+
+        Bread();
         // Initializer (user specifies bread size pile location)
-        Bread(double size, double xcoord, double ycoord);
+        Bread(double size, double xcoord, double ycoord, int numbread);
     
         // Setters
         void setMass(double size); // mass updated as ants eat
     
         // Getters (will need to be accessed to perform calculations)
         double getMass();
+        int getNumbread();
         double getXcoord();
         double getYcoord();
     
@@ -29,6 +31,7 @@ class Bread {
     
         double mass;
         double x,y;
+        int numbread;
     
 };
 

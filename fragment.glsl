@@ -15,7 +15,7 @@ uniform vec2 center; // for circle
 uniform float radius; // for circle
 uniform vec2 start; // for line
 uniform vec2 end; // for line
-uniform float percent; // for line
+uniform float distance; // for line
 
 void main()
 {
@@ -54,7 +54,8 @@ void main()
         float mag = sqrt(vx * vx + vy * vy);
         float ux = vx / mag;
         float uy = vy / mag;
-        float dist = percent * orig_distance;
+        //float dist = percent * orig_distance;
+        float dist = distance;
         float endx = start.x + dist * ux;
         float endy = start.y + dist * uy;
 
