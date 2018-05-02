@@ -15,7 +15,7 @@ const int NO_TEX = 2;
 
 Visual::Visual(int width, int height) {
 
-    window = initialize(width, height, "OpenGL Practice");
+    window = initialize(width, height, "Ant Colony Simulator - ECE 4122 Final Project");
 
     // Create Vertex Array Object
     glGenVertexArrays(1, &vao);
