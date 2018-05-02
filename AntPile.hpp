@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <string>
+#include "Bread.hpp"
 
 using namespace std;
 
@@ -25,9 +26,13 @@ class AntPile {
         double getXcoord();
         double getYcoord();
         double getSpeed();
-        int getPopulation();
+        bool getEating();
         double getRadius();
+        double getFoodRadius();
         double getCarryCap();
+        int getOutRate();
+        Bread getBreadcrumb();
+        void radiusRun();
     
         // Misc. Functions
          void printInfo(); // use for debugging and object creation
@@ -38,11 +43,14 @@ class AntPile {
         string species; // will be set to "Black" "Red" "Fire" or "Bullet" etc on initialization
         double x, y; // x,y coordinates
         double speed; // in m/s, varies by ant type
-        int population; //
         double searchRadius; // radius of current search circle
-        double carryCap; // carring capacity of ant
-    
-    
+        double foodRadius;
+        double carryCap; // carrying capacity of ant
+        bool eating;
+        Bread breadcrumb;
+        int outRate;
+        int currentOut;
+
 };
 
 #endif /* AntPile_hpp */

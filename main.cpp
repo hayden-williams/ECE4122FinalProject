@@ -33,6 +33,8 @@ float circles[] = { 0.1f, 0.2f, 0.5f };
 
 
 int main() {
+    
+    
 
     while(!glfwWindowShouldClose(v.getWindow()) && keep_looping) {
         v.displayGraphicsInnerLoop(num_anthills, anthills, num_breadcrumbs, breadcrumbs, circles);
