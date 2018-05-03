@@ -56,25 +56,25 @@ AntPile::AntPile(int type, double xcoord, double ycoord) {
             
         case 0: // black ant
             species = "Black Ant";
-            speed = 0.45*5; // in mm/ms
+            speed = 0.45*2; // in mm/ms
             carryCap = 13; // in mg
             outRate = 25;
             break;
         case 1: // red ant
             species = "Red Ant";
-            speed = 0.50*5; // in mm/ms
+            speed = 0.50*2; // in mm/ms
             carryCap = 15; // in mg
             outRate = 28;
             break;
         case 2: // fire ant
             species = "Fire Ant";
-            speed = 0.55*5; // in mm/ms
+            speed = 0.55*2; // in mm/ms
             carryCap = 17; // in mg
             outRate = 32;
             break;
         case 3: // bullet ant
             species = "Bullet Ant";
-            speed = 0.60*5; // in mm/ms
+            speed = 0.60*2; // in mm/ms
             carryCap = 19; // in mg
             outRate = 37;
             break;
@@ -141,18 +141,15 @@ int AntPile::getCollected() {
 };
 
 void AntPile::radiusRun(Bread **crumbs, int numCrumb) {
-    std::cout<<"not making it "<<endl;
     searchRadius = searchRadius + speed;
-    if (searchRadius > 2000) {
+    if (searchRadius > 2200) {
         done = true;
     }
-    std::cout<<searchRadius<<endl;
     for (int i = 0; i < numCrumb; i++) {
         Bread* c = crumbs[i];
         if((c->getXcoord() > 0 || c->getYcoord() > 0) && (c->getMass() != 0)) {
             double pythag = sqrt(pow(x - c->getXcoord(), 2) + pow(y - c->getYcoord(), 2));
             if (pythag <= searchRadius) {
-                //std::cout << "in if" << endl;
                 eating = true;
                 breadcrumb = c;
                 foodRadius = searchRadius;
@@ -166,11 +163,9 @@ void AntPile::eat(Bread *breadcrumb) {
         searchRadius = searchRadius - speed;
     } else {
         if (length < foodRadius) {
-            //std::cout<< "printttt" <<endl;
             length = length + speed;
         } else {
             if(breadcrumb->getMass() > 0) {
-                std::cout<<collected<<endl;
                 if(currentOut == outRate) {
                     double newMass = breadcrumb->getMass() - carryCap;
                     if (newMass <= 0) {
@@ -181,29 +176,20 @@ void AntPile::eat(Bread *breadcrumb) {
                     }
                     collected += carryCap;
                     breadcrumb->setMass(newMass);
-                    //std::cout<<breadcrumb->getMass()<<endl;
                     currentOut = 0;
-                    //std::cout<<collected<<endl;
                 } else {
                     currentOut++;
                 }
             } else {
                 foodRadius = 0;
-                //std::cout<<"got into else" << endl;
-                //std::cout<< length  << endl;
-                //std::cout<< breadcrumb->getMass() << endl;
                 if(length > 0) {
-                    //std::cout<<"in if" << endl;
-                    // length = 0;
                     length = length - speed;
                     if (length <= 0) {
-                        //std::cout<<"finished eating\n\n\n" << endl;
                         searchRadius = 0;
                         foodRadius = 0;
                         length = 0;
                         eating = false;
                     }
-                    //std::cout<< length << endl;
                 }
             }
         }

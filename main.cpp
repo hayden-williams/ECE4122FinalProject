@@ -167,7 +167,6 @@ int main() {
 		dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
 		decrimentCounter = 1;
 		while (dist0_1 <= min_dist_anthills) {
-            std::cout<<"Died after this 1 \n"<<endl;
 			anthill_x_pos[1] = rand() % x_axis_max;
 			anthill_y_pos[1] = rand() % y_axis_max;
 			dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
@@ -176,12 +175,10 @@ int main() {
 			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
 			decrimentCounter += 1;
 		}
-        std::cout<<"Died after this 2 \n"<<endl;
 		dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
 		dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
 		decrimentCounter = 1;
 		while (dist0_2 <= min_dist_anthills || dist1_2 <= min_dist_anthills) {
-            std::cout<<"Died after this 3 \n"<<endl;
 			anthill_x_pos[2] = rand() % x_axis_max;
 			anthill_y_pos[2] = rand() % y_axis_max;
 			dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
@@ -223,7 +220,6 @@ int main() {
 		dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
 		decrimentCounter = 1;
 		while (dist0_2 <= min_dist_anthills || dist1_2 <= min_dist_anthills) {
-            std::cout<<"Died after this 4 \n"<<endl;
 			anthill_x_pos[2] = rand() % x_axis_max;
 			anthill_y_pos[2] = rand() % y_axis_max;
 			dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
@@ -704,7 +700,6 @@ int main() {
 			}
 		}
 		else {
-            std::cout<<"Dieddddd \n"<<endl;
 			// Default: Assume 4 anthills (since the extras will just be at 0,0)
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
@@ -1122,7 +1117,6 @@ int main() {
 		std::cout << crumb_x_pos[3] << ", " << crumb_y_pos[3] << std::endl;
 	}
 	else {
-        std::cout<<"Deadddd \n"<<endl;
 		// ERROR. ASSUME 1 Crumb
 
 		crumb_x_pos[0] = rand() % x_axis_max; // may what to add to it if too close to border
