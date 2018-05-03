@@ -1404,11 +1404,11 @@ int main() {
 			anthills[3 * i + 2] = 0.25f;
 		}
 		// array of breadcrumbs: x pos, y pos, size
-		float* crumbs = new float[numCrumb * 3];
+		float* crumbs_rachel = new float[numCrumb * 3];
 		for (int i = 0; i < numCrumb; i++) {
-			crumbs[3 * i] = crumb_x_pos[i] / 1000.0f - 1.0f;
-			crumbs[3 * i + 1] = crumb_y_pos[i] / 1000.0f - 1.0f;
-			crumbs[3 * i + 2] = 0.25f;
+			crumbs_rachel[3 * i] = crumb_x_pos[i] / 1000.0f - 1.0f;
+			crumbs_rachel[3 * i + 1] = crumb_y_pos[i] / 1000.0f - 1.0f;
+			crumbs_rachel[3 * i + 2] = (crumbs[i]->getMass() > 0) ? 0.25f : 0.0f;
 		}
 		// array of radii of "scout ant" circles for each anthill
 		float circles[] = { float(sradius0), float(sradius1), float(sradius2), float(sradius3) };
@@ -1417,7 +1417,7 @@ int main() {
 						  float(crumb1), float(pathToFood1),
 						  float(crumb2), float(pathToFood2),
 						  float(crumb3), float(pathToFood3) };
-		v.displayGraphicsInnerLoop(numAnthill, anthills, numCrumb, crumbs, circles, lines);
+		v.displayGraphicsInnerLoop(numAnthill, anthills, numCrumb, crumbs_rachel, circles, lines);
 
 	}
 
