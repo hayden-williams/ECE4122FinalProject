@@ -20,6 +20,8 @@ uniform float distance; // for line
 // screen size
 uniform int width;
 uniform int height;
+uniform int viewportx;
+uniform int viewporty;
 
 void main()
 {
@@ -33,8 +35,8 @@ void main()
         outColor = vec4(Color, 0.0);
 
         vec3 changed_coord = gl_FragCoord.xyz / gl_FragCoord.w;
-        float x = (changed_coord.x / (width) - 0.5) * 2.0;
-        float y = (changed_coord.y / (height) - 0.5) * 2.0;
+        float x = (changed_coord.x / (viewportx) - 0.5) * 2.0;
+        float y = (changed_coord.y / (viewporty) - 0.5) * 2.0;
 
         if ((x - center.x) * (x - center.x) + (y - center.y) * (y - center.y) < radius * radius
             && (x - center.x) * (x - center.x) + (y - center.y) * (y - center.y)
@@ -46,8 +48,8 @@ void main()
         outColor = vec4(Color, 0.0);
 
         vec3 changed_coord = gl_FragCoord.xyz / gl_FragCoord.w;
-        float x = (changed_coord.x / (width) - 0.5) * 2.0;
-        float y = (changed_coord.y / (height) - 0.5) * 2.0;
+        float x = (changed_coord.x / (viewportx) - 0.5) * 2.0;
+        float y = (changed_coord.y / (viewporty) - 0.5) * 2.0;
 
         float dxc = x - start.x;
         float dyc = y - start.y;

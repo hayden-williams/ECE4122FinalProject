@@ -36,6 +36,13 @@ Visual::Visual(int width, int height) {
     glUniform1i(glGetUniformLocation(shaderProgram, "width"), width);
     glUniform1i(glGetUniformLocation(shaderProgram, "height"), height);
 
+    GLint m_viewport[4];
+    glGetIntegerv( GL_VIEWPORT, m_viewport );
+    std::cout << "viewport x: " << m_viewport[2] << " viewport y: " << m_viewport[3] << std::endl;
+
+    glUniform1i(glGetUniformLocation(shaderProgram, "viewportx"), m_viewport[2]);
+    glUniform1i(glGetUniformLocation(shaderProgram, "viewporty"), m_viewport[3]);
+
 }
 
 void Visual::createSquare(GLfloat* vertices, float side_length, float x, float y, int tex) {
