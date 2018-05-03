@@ -3,28 +3,50 @@ project(FinalProject)
 
 set(CMAKE_CXX_STANDARD 17)
 
-
-find_package(GLEW REQUIRED)
-find_package(OpenGL REQUIRED)
-set(GLFW_LIBRARY /usr/local/Cellar/glfw/3.2.1/lib/libglfw.dylib)
-set(SOIL_LIBRARY /usr/local/lib/libSOIL.dylib)
-set(LOCAL_INCLUDE /usr/local/include)
-set(SOIL_INCLUDE /usr/local/include/SOIL)
-
-include_directories(
-        ${GLEW_INCLUDE_DIR}
-        ${OPENGL_INCLUDE_DIR}
-        ${LOCAL_INCLUDE}
-        ${SOIL_INCLUDE}
-)
-
 set(SOURCE_FILES graphics.cpp main.cpp AntPile.cpp Bread.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_link_libraries(${PROJECT_NAME}
-        ${GLEW_LIBRARIES}
-        ${OPENGL_gl_LIBRARY}
-        ${GLFW_LIBRARY}
-        ${SOIL_LIBRARY}
-        )
+set(CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}:/usr/local/Cellar)
+
+MESSAGE(STATUS "module path:    " ${CMAKE_MODULE_PATH})
+MESSAGE(STATUS "prefix path:    " ${CMAKE_PREFIX_PATH})
+MESSAGE(STATUS "install prefix:    " ${CMAKE_INSTALL_PREFIX})
+
+find_package(GLEW)
+if (GLEW_FOUND)
+    MESSAGE(STATUS "found GLEW")
+    include_directories(${GLEW_INCLUDE_DIR} ${GLEW_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} ${GLEW_LIBRARY} ${GLEW_LIBRARIES})
+endif (GLEW_FOUND)
+
+find_package(OpenGL)
+if (OpenGL_FOUND)
+    MESSAGE(STATUS "found OpenGL")
+    include_directories(${OpenGL_INCLUDE_DIR} ${OpenGL_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} ${OpenGL_LIBRARY} ${OpenGL_LIBRARIES} ${OPENGL_gl_LIBRARY})
+endif (OpenGL_FOUND)
+
+find_package(GLFW)
+if (GLFW_FOUND)
+    MESSAGE(STATUS "found GLFW")
+    include_directories(${GLFW_INCLUDE_DIR} ${GLFW_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} ${GLFW_LIBRARY} ${GLFW_LIBRARIES})
+else (GLFW_FOUND)
+    set(GLFW_LIBRARY /usr/local/Cellar/glfw/3.2.1/lib/libglfw.dylib)
+    target_link_libraries(${PROJECT_NAME} ${GLFW_LIBRARY})
+endif (GLFW_FOUND)
+
+find_package(SOIL)
+if (SOIL_FOUND)
+    MESSAGE(STATUS "found SOIL")
+    include_directories(${SOIL_INCLUDE_DIR} ${SOIL_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} ${SOIL_LIBRARY} ${SOIL_LIBRARIES})
+else (SOIL_FOUND)
+    set(SOIL_LIBRARY /usr/local/lib/libSOIL.dylib)
+    set(SOIL_INCLUDE /usr/local/include/SOIL)
+    include_directories(${SOIL_INCLUDE})
+    target_link_libraries(${PROJECT_NAME} ${SOIL_LIBRARY})
+endif (SOIL_FOUND)
+
+
