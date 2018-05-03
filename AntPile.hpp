@@ -28,14 +28,16 @@ class AntPile {
         double getYcoord();
         double getSpeed();
         bool getEating();
+        bool getDone();
         double getRadius();
         double getFoodRadius();
         double getLength();
         double getCarryCap();
         int getOutRate();
-        Bread getBreadcrumb();
+        int getCollected();
+        Bread* getBreadcrumb();
         void radiusRun(Bread**, int);
-        void eat(Bread);
+        void eat(Bread*);
     
         // Misc. Functions
          void printInfo(); // use for debugging and object creation
@@ -50,10 +52,12 @@ class AntPile {
         double foodRadius;
         double carryCap; // carrying capacity of ant
         bool eating;
-        Bread breadcrumb;
+        Bread *breadcrumb;
         int outRate;
         int currentOut;
         double length;
+        int collected;
+        bool done;
 
 };
 

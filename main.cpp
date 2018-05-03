@@ -32,6 +32,7 @@ uint16_t anthill_y_pos[] = { 0, 0, 0, 0 }; // y position of anthill
 uint16_t crumb_x_pos[] = { 0, 0, 0, 0 }; // x position of crumb
 uint16_t crumb_y_pos[] = { 0, 0, 0, 0 }; // y position of crumb
 
+
 // dist for anthills
 double dist0_1 = 0; // dist b/t anthill[0] and anthill[1]
 double dist0_2 = 0;
@@ -83,7 +84,7 @@ Bread* crumbObj3 = nullptr;
 
 
 int main() {
-
+    srand(time(NULL));
 	// give user choice = easier to test too
 	std::cout << "Entered Main" << std::endl;
 	std::cout << "Would you like to choose the number of anthills and crumbs? <y/n>" << std::endl;
@@ -166,6 +167,7 @@ int main() {
 		dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
 		decrimentCounter = 1;
 		while (dist0_1 <= min_dist_anthills) {
+            std::cout<<"Died after this 1 \n"<<endl;
 			anthill_x_pos[1] = rand() % x_axis_max;
 			anthill_y_pos[1] = rand() % y_axis_max;
 			dist0_1 = std::sqrt(std::pow(anthill_x_pos[1] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[1] - anthill_y_pos[0], 2));
@@ -174,10 +176,12 @@ int main() {
 			if (decrimentCounter % max_num_loops_initiation == 0) { min_dist_anthills -= 1; }
 			decrimentCounter += 1;
 		}
+        std::cout<<"Died after this 2 \n"<<endl;
 		dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
 		dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
 		decrimentCounter = 1;
 		while (dist0_2 <= min_dist_anthills || dist1_2 <= min_dist_anthills) {
+            std::cout<<"Died after this 3 \n"<<endl;
 			anthill_x_pos[2] = rand() % x_axis_max;
 			anthill_y_pos[2] = rand() % y_axis_max;
 			dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
@@ -219,6 +223,7 @@ int main() {
 		dist1_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[1], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[1], 2));
 		decrimentCounter = 1;
 		while (dist0_2 <= min_dist_anthills || dist1_2 <= min_dist_anthills) {
+            std::cout<<"Died after this 4 \n"<<endl;
 			anthill_x_pos[2] = rand() % x_axis_max;
 			anthill_y_pos[2] = rand() % y_axis_max;
 			dist0_2 = std::sqrt(std::pow(anthill_x_pos[2] - anthill_x_pos[0], 2) + std::pow(anthill_y_pos[2] - anthill_y_pos[0], 2));
@@ -699,6 +704,7 @@ int main() {
 			}
 		}
 		else {
+            std::cout<<"Dieddddd \n"<<endl;
 			// Default: Assume 4 anthills (since the extras will just be at 0,0)
 			dist0c_0a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[0], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[0], 2));
 			dist0c_1a = std::sqrt(std::pow(crumb_x_pos[0] - anthill_x_pos[1], 2) + std::pow(crumb_y_pos[0] - anthill_y_pos[1], 2));
@@ -1116,6 +1122,7 @@ int main() {
 		std::cout << crumb_x_pos[3] << ", " << crumb_y_pos[3] << std::endl;
 	}
 	else {
+        std::cout<<"Deadddd \n"<<endl;
 		// ERROR. ASSUME 1 Crumb
 
 		crumb_x_pos[0] = rand() % x_axis_max; // may what to add to it if too close to border
@@ -1241,7 +1248,7 @@ int main() {
 		//Bread crumbObj0(42,crumb_x_pos[0],crumb_y_pos[0],0);
 		//Bread crumbObj1(6,crumb_x_pos[1],crumb_y_pos[1],1);
 		crumbObj0 = new Bread(42,crumb_x_pos[0],crumb_y_pos[0],0);
-		crumbObj1 = new Bread(6,crumb_x_pos[1],crumb_y_pos[1],1);
+		crumbObj1 = new Bread(222,crumb_x_pos[1],crumb_y_pos[1],1);
 	}
 	else if (numCrumb == 3) {
 		// Create object here
@@ -1264,6 +1271,8 @@ int main() {
 		crumbObj3 = new Bread(35,crumb_x_pos[3],crumb_y_pos[3],3);
 	}
 
+
+
 	// create array of objects for anthills and crumbs
 	Bread *crumbs[4];
 	crumbs[0] = crumbObj0;
@@ -1275,7 +1284,6 @@ int main() {
 
 
 	while (runSim && !glfwWindowShouldClose(v.getWindow())) {
-
 		// exit with ESC
 		if (glfwGetKey(v.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 			glfwSetWindowShouldClose(v.getWindow(), GL_TRUE);
@@ -1289,8 +1297,38 @@ int main() {
 		// If crumbs are empty and if Anthills are all searching
 		// end while loop
 		timeTick += 1;
+        if(numAnthill == 4) {
+            if (antObj0->getDone() && antObj1->getDone() && antObj2->getDone() && antObj3->getDone()){
+                std::cout<<"Amounts collected:"<<endl;
+                std::cout<< antObj0->getSpecies() + "; " + std::to_string(antObj0->getCollected()) <<endl;
+                std::cout<< antObj1->getSpecies() + "; " + std::to_string(antObj1->getCollected()) <<endl;
+                std::cout<< antObj2->getSpecies() + "; " + std::to_string(antObj2->getCollected()) <<endl;
+                std::cout<< antObj3->getSpecies() + "; " + std::to_string(antObj3->getCollected()) <<endl;
+                break;
+            }
+        }
 
-		double sradius0 = antObj0->getRadius();
+        if(numAnthill == 3) {
+            if (antObj0->getDone() && antObj1->getDone() && antObj2->getDone()){
+                std::cout<<"Amounts collected:"<<endl;
+                std::cout<< antObj0->getSpecies() + "; " + std::to_string(antObj0->getCollected()) <<endl;
+                std::cout<< antObj1->getSpecies() + "; " + std::to_string(antObj1->getCollected()) <<endl;
+                std::cout<< antObj2->getSpecies() + "; " + std::to_string(antObj2->getCollected()) <<endl;
+                break;
+            }
+        }
+
+        if(numAnthill == 2) {
+            if (antObj0->getDone() && antObj1->getDone()){
+                std::cout<<"Amounts collected:"<<endl;
+                std::cout<< antObj0->getSpecies() + "; " + std::to_string(antObj0->getCollected()) <<endl;
+                std::cout<< antObj1->getSpecies() + "; " + std::to_string(antObj1->getCollected()) <<endl;
+                break;
+            }
+        }
+
+
+        double sradius0 = antObj0->getRadius();
 		double pathToFood0 = antObj0->getLength();
 		double sradius1 = antObj1->getRadius();
 		double pathToFood1 = antObj1->getLength();
@@ -1300,14 +1338,13 @@ int main() {
 		double pathToFood2 = 0;
 		double pathToFood3 = 0;
 
-
 		if(numAnthill > 2) {
 			sradius2 = antObj2->getRadius();
 			pathToFood2 = antObj2->getLength();
 		}
 		if(numAnthill > 3) {
 			sradius3 = antObj3->getRadius();
-			pathToFood2 = antObj3->getLength();
+			pathToFood3 = antObj3->getLength();
 		}
 
 
@@ -1315,21 +1352,27 @@ int main() {
             antObj0->radiusRun(crumbs, numCrumb);
 		}
         if(!antObj1->getEating()) {
-		    antObj1->radiusRun(crumbs, numCrumb);
-		}
-        if(!antObj2->getEating() && numAnthill > 2) {
-            antObj2->radiusRun(crumbs, numCrumb);
+            antObj1->radiusRun(crumbs, numCrumb);
         }
-        if(!antObj3->getEating() && numAnthill > 3) {
-            antObj3->radiusRun(crumbs, numCrumb);
+        if(numAnthill > 2) {
+            if (!antObj2->getEating() && numAnthill > 2) {
+                antObj2->radiusRun(crumbs, numCrumb);
+            }
+        }
+        if(numAnthill > 3) {
+            if (!antObj3->getEating() && numAnthill > 3) {
+                antObj3->radiusRun(crumbs, numCrumb);
+            }
         }
 
 
+        Bread* eatingCrumb2;
+        Bread* eatingCrumb3;
 
-        Bread eatingCrumb0 = antObj0->getBreadcrumb();
-		Bread eatingCrumb1 = antObj1->getBreadcrumb();
-		Bread eatingCrumb2 = antObj2->getBreadcrumb();
-		Bread eatingCrumb3 = antObj3->getBreadcrumb();
+        Bread* eatingCrumb0 = antObj0->getBreadcrumb();
+		Bread* eatingCrumb1 = antObj1->getBreadcrumb();
+        if(numAnthill > 2) eatingCrumb2 = antObj2->getBreadcrumb();
+        if(numAnthill > 3) eatingCrumb3 = antObj3->getBreadcrumb();
 
 		int crumb0 = 0;
 		int crumb1 = 0;
@@ -1337,20 +1380,24 @@ int main() {
 		int crumb3 = 0;
 
         if(antObj0->getEating()) {
-        	crumb0 = eatingCrumb0.getNumbread();;
+        	crumb0 = eatingCrumb0->getNumbread();;
             antObj0->eat(eatingCrumb0);
         }
         if(antObj1->getEating()) {
-        	crumb1 = eatingCrumb1.getNumbread();
+        	crumb1 = eatingCrumb1->getNumbread();
             antObj1->eat(eatingCrumb1);
         }
-        if(antObj2->getEating() && numAnthill > 2) {
-			crumb2 = eatingCrumb2.getNumbread();
-            antObj2->eat(eatingCrumb2);
+        if(numAnthill > 2) {
+            if(antObj2->getEating() && numAnthill > 2) {
+                crumb2 = eatingCrumb2->getNumbread();
+                antObj2->eat(eatingCrumb2);
+            }
         }
-        if(antObj3->getEating() && numAnthill > 3) {
-        	crumb3 = eatingCrumb3.getNumbread();
-            antObj3->eat(eatingCrumb3);
+        if(numAnthill > 3) {
+            if (antObj3->getEating() && numAnthill > 3) {
+                crumb3 = eatingCrumb3->getNumbread();
+                antObj3->eat(eatingCrumb3);
+            }
         }
 
 
